@@ -1,0 +1,35 @@
+#include<stdio.h>
+int main()
+{
+    int n,in,out,bsize,bucket=0;
+    printf("ENTER THE BUCKET SIZE : ");
+    scanf("%d",&bsize);
+    printf("ENTER THE OUTPUT RATE : ");
+    scanf("%d",&out);
+    printf("ENTER THE NUMBER OF INPUTS : ");
+    scanf("%d",&n);
+
+    while(n!=0)
+    {
+        printf("ENTER THE INPUT RATE : ");
+        scanf("%d",&in);
+        printf("\nINCOMING PACKET RATE IS %d\n",in);
+
+        if(in < (bsize-bucket))
+        {
+            bucket+=in;
+            printf("\nBUCKET STATUS ---->  %d out of %d\n",bucket,bsize);
+        }
+        else
+        {
+            printf("DROPPED PACKET : %d ",in - (bsize-bucket));
+            bucket = bsize;
+            printf("\nBUCKET STATUS ---->  %d out of %d\n",bucket,bsize);
+        }
+        bucket = bucket - out;
+        if(bucket<0)
+            bucket=0;
+        printf("AFTER OUTGOING BUCKET STATUS : %d OUT OF %d\n",bucket,bsize);
+        n--;
+    }
+}
